@@ -15,17 +15,17 @@
 
     <!-- A Java 9 or later compiler is required -->
 
-    <exec executable="java_home" outputproperty="jdk">
+    <exec executable="/usr/libexec/java_home" outputproperty="jdk">
         <arg value="-F"/>
         <arg value="-v"/>
-        <arg value="9+"/>
+        <arg value="11"/>
     </exec>
 
     <property name="javac" location="${jdk}/bin/javac"/>
 
     <!-- A Java 8 boot class path is required -->
 
-    <exec executable="java_home" outputproperty="jdk8">
+    <exec executable="/usr/libexec/java_home" outputproperty="jdk8">
         <arg value="-F"/>
         <arg value="-v"/>
         <arg value="1.8"/>
@@ -53,7 +53,7 @@
 
     <!-- Note: open source JavaNativeFoundation is required to build for arm, see https://github.com/apple/openjdk -->
 
-    <property name="JNFdir" location="${SDKroot}/System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks"/>
+    <property name="JNFdir" location="/Applications/Charles.app/Contents/Frameworks"/>
 
     <property name="debug" value="false"/>
 
