@@ -76,9 +76,9 @@ public class VAppearances
     private static final @NotNull AppearancesCache appearancesByName
       = new AppearancesCache();
     private static final @NotNull Set<ChangeListener> changeListeners
-      = Collections.synchronizedSet(new HashSet<>());
+      = new HashSet<>();
     private static final @NotNull Set<ChangeListener> effectiveAppearanceChangeListeners
-      = Collections.synchronizedSet(new HashSet<>());
+      = new HashSet<>();
 
     private VAppearances()
     {
