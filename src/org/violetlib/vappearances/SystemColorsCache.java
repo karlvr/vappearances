@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 /* package private */ final class SystemColorsCache
 {
@@ -32,5 +33,17 @@ import java.util.Map;
     public synchronized @Nullable Map<String,Color> get(@NotNull String appearanceName)
     {
         return cache.get(appearanceName);
+    }
+
+    public synchronized @NotNull Map<String,Color> computeIfAbsent(
+        @NotNull String appearanceName,
+        @NotNull Function<String, Map<String,Color>> mappingFunction)
+    {
+        Map<String,Color> colors = cache.get(appearanceName);
+        if (colors == null) {
+            colors = mappingFunction.apply(appearanceName);
+            cache.put(appearanceName, colors);
+        }
+        return colors;
     }
 }

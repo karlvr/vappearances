@@ -177,17 +177,13 @@ public class VAppearances
 
     /* package private */ static @NotNull Map<String,Color> getSystemColorsForAppearance(@NotNull String appearanceName)
     {
-        Map<String,Color> colors = systemColorsCache.get(appearanceName);
-        if (colors != null) {
-            return colors;
-        }
-        try {
-            colors = readSystemColors(appearanceName);
-        } catch (IOException e) {
-            colors = new HashMap<>();
-        }
-        systemColorsCache.put(appearanceName, colors);
-        return colors;
+        return systemColorsCache.computeIfAbsent(appearanceName, name -> {
+            try {
+                return readSystemColors(name);
+            } catch (IOException e) {
+                return new HashMap<>();
+            }
+        });
     }
 
     private static void invalidateAppearanceSettings()
